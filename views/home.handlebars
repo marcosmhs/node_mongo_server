@@ -1,0 +1,29 @@
+<div class="jumbotron">
+    <h1 class="display-4">Bem Vindo!</h1>
+    <p class="lead">Este é um blog sobre tecnologia, universo e tudo mais.</p>
+    <hr class="my-4">
+    <p>Seu conteúdo é livre e pode ser compartilhado com todos, só não esqueça de creditar o autor :)</p>
+</div>
+
+<h4>Postagens recentes:</h4>
+
+{{#each posts}}
+    <div class="card mt-4 ">
+        <div class="card-header">   
+            <a href="/post/{{urlSlug}}" class="link-secondary"><h3>{{title}}</h3></a>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{text}}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Categoria: {{category.name}}</small>
+            <br>
+            <small class="text-muted">Tag: {{category.urlSlug}}</small>
+        </div>
+    </div>  
+{{else}}
+    <br>
+    <div class="jumbotron">
+        <p class="lead">Ops, ainda não tem nada aqui</p>
+    </div>
+{{/each}}

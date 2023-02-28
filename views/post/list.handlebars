@@ -1,0 +1,47 @@
+<h2>Postagens</h2>
+<br>
+<a href="/admin/post/create"><button class="btn btn-primary">Nova Postagem</button></a>
+{{#each posts}}
+    <div class="card mt-4 ">
+        <div class="card-body">
+            <label for="text">{{_id}}</label>
+            <br>
+            <h4>{{title}}</h5>
+            <h6>{{category.name}}</h6>
+            <small>URL Slug: {{urlSlug}}</small>
+            <br>
+            
+            <a href='/admin/post/update/{{_id}}'><button class = "btn btn-primary mt-2">Editar</button></a>
+            <button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#removeModal-{{_id}}">
+                Remover
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="removeModal-{{_id}}" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="removeModalLabel">Confirmação de exclusão</h1>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja remover esta postagem?
+                </div>
+                <div class="modal-footer">
+                    <form action="/admin/post/remove" method="post">
+                        <input type="hidden" name="id" id="id" value="{{_id}}">
+                        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cancelar</button>                        
+                        <button type="submit" class = "btn btn-danger mt-2">Confirmar</button>
+                    </form>                    
+                </div>
+                </div>
+            </div>
+            </div>            
+        </div>
+    </div>
+{{else}}
+  <div class="card mt-4 ">
+        <div class="card-body">
+            <h5>Nenhuma postagem cadastrada</h5>
+        </div>
+    </div>
+{{/each}}

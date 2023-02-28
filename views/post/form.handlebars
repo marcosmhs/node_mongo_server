@@ -1,0 +1,50 @@
+{{#each errors}}
+    <div class="alert alert-danger card w-50">
+        {{{text}}}
+    </div>
+{{/each}}
+
+<div class="card w-70">
+    <div class="card-header">
+        {{#ifStr formState 'create'}}
+            <h3>Nova postagem</h3>
+        {{else}}
+            <h3>Editar postagem</h3>
+        {{/ifStr }}
+    </div>
+    <div class="card-body">
+        <form action="/admin/post/createorUpdate" method="post">
+            <input type="hidden" name="id" id="id" value="{{post._id}}">
+            <input type="hidden" name="formState" id="id" value="{{formState}}">
+            <label for="category">Categorias</label>
+            {{formState}}
+            <select class="form-select" name="category">
+                {{#ifStr formState 'create'}}
+                    <option value='--'>Selecione uma categoria</option>
+                {{/ifStr}}
+                {{#each categories}}
+                    {{#ifStr ../formState 'create'}}
+                        <option value='{{../_id}}'>{{../name}}</option>
+                    {{else}}
+                        {{#ifStr ../../post.category._id ../_id}}
+                            <option value="{{../_id}}" selected>{{../name}}</option>
+                        {{else}}
+                            <option value="{{../_id}}">{{../name}}</option>
+                        {{/ifStr }}                            
+                    {{/ifStr}}
+                {{else}}
+                    <option value='--'>Nenhuma categoria registrada</option>
+                {{/each}}
+            </select>
+            <label for="title">Título</label>
+            <input class="form-control" type="text" name="title" id="title" placeholder="Título da postagem" value="{{post.title}}" required>
+            <label for="slug">URL Slug</label>          
+            <input class="form-control" type="text" name="urlSlug" id="urlSlug" placeholder="URL Slug" value="{{post.urlSlug}}" required>
+            <label for="text">text</label>
+            <textarea class="form-control" rows=20 name="text" id="text" placeholder="Texto" required>{{post.text}}</textarea>
+            <br>
+            <button type="submit" class="btn btn-success mt-2">Salvar</button>
+            <a href="/admin/post" id="cancel" name="cancel" class="btn btn-secondary mt-2">Cancelar</a>            
+        </form>
+    </div>
+</div>    

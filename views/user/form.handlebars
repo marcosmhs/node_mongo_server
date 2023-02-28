@@ -1,0 +1,33 @@
+{{#each errors}}
+    <div class="alert alert-danger card w-50">
+        {{{text}}}
+    </div>
+{{/each}}
+
+<div class="card w-50">
+    <div class="card-header">
+        {{#ifStr formState 'create'}}
+            <h3>Criar uma conta</h3>
+        {{else}}
+            <h3>Alterar seus dados</h3>
+        {{/ifStr }}
+    </div>
+    <div class="card-body">
+        <form action="/user/createOrUpdate" method="post">
+            <input type="hidden" name="id" id="id" value="{{user._id}}">
+            <input type="hidden" name="formState" id="formState" value="{{formState}}">
+            <input type="hidden" name="admin" id="admin" value="{{user.admin}}">
+            <label for="name">Nome</label>  
+            <input class="form-control" type="text" name="name" id="name" placeholder="Nome" value='{{user.name}}' required>
+            <label for="email">E-mail</label>
+            <input class="form-control" type="text" name="email" id="email" placeholder="Email" value='{{user.email}}' required>
+            <label for="password">Senha</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Senha" {{#ifStr formState 'create'}} required {{/ifStr}}>
+            <label for="password_2">Confirme sua senha</label>
+            <input class="form-control" type="password" name="password_2" id="password_2" placeholder="Repita sua senha" {{#ifStr formState 'create'}} required {{/ifStr}}>
+            <br>
+            <button type="submit" class="btn btn-success mt-2">Salvar</button>
+            <a href="/" id="cancel" name="cancel" class="btn btn-secondary mt-2">Cancelar</a>
+        </form>
+    </div>
+</div>    

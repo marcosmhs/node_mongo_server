@@ -1,0 +1,29 @@
+{{#each errors}}
+    <div class="alert alert-danger card w-50">
+        {{{text}}}
+    </div>
+{{/each}}
+
+<div class="card w-50">
+    <div class="card-header">
+        {{#ifStr formState 'create'}}
+            <h3>Nova Categoria</h3>
+        {{/ifStr }}        
+        {{#ifStr formState 'update'}}
+            <h3>Editar categoria</h3>
+        {{/ifStr }}
+    </div>
+    <div class="card-body">
+        <form action="/admin/category/createOrUpdate" method="post">
+            <input type="hidden" name="id" id="id" value="{{category._id}}">
+            <input type="hidden" name="formState" id="formState" value="{{formState}}">
+            <label for="name">Nome</label>  
+            <input class="form-control" type="text" name="name" id="name" placeholder="Nome da categoria" value='{{category.name}}' required>
+            <label for="slug">URL Slug</label>
+            <input class="form-control" type="text" name="urlSlug" id="urlSlug" placeholder="URL Slug" value='{{category.urlSlug}}' required>
+            <br>
+            <button type="submit" class="btn btn-success mt-2">Salvar</button>
+            <a href="/admin/category" id="cancel" name="cancel" class="btn btn-secondary mt-2">Cancelar</a>
+        </form>
+    </div>
+</div>    
