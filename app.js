@@ -75,16 +75,11 @@ app.set('view engine', 'handlebars');
 // ----------------------------------
 mongoose.set('strictQuery', false)
 mongoose.Promise = global.Promise
-var url = 'mongodb+srv://system:system@marcosmhs.q0n1p9n.mongodb.net/mysystem';
-mongoose.connect(
-    url
-).then( () => {
-    console.log('Conectado com o MongoDB em marcosmhs.q0n1p9n.mongodb.net/mysystem');
-}
-).catch((error)=>  {
-    console.log('Error ao se conectar com MongoDB em marcosmhs.q0n1p9n.mongodb.net/mysystem: ' + error);
-}
-);
+const password = 'password'
+var url = 'mongodb+srv://system:' + password + '@marcosmhs.q0n1p9n.mongodb.net/mysystem';
+mongoose.connect(url)
+ .then(() => console.log('Conectado com o MongoDB em marcosmhs.q0n1p9n.mongodb.net/mysystem'))
+ .catch((error) => console.log('Error ao se conectar com MongoDB em marcosmhs.q0n1p9n.mongodb.net/mysystem: ' + error));
 
 // ----------------------------------
 // routes
